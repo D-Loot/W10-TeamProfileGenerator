@@ -1,5 +1,61 @@
 # 10 Object-Oriented Programming: Team Profile Generator
 
+# The Task
+
+The task was to create a program that, when prompted, would return a fully generated HTML file. When the javascript is loaded, a series of questions will populate the command line. After each question is answered, my program will create an HTML file which displays cards filled out with the employee's information from the prompts. When the email is selected, it will create an email designated to the given email. When the GitHub links are selected, it will send the user to the appropriate GitHub account.
+
+I created a video demonstrating the Team Profile Generator and included the link to that video down below. A "jest" testing method was used to test each of the class js files in the lib folder.
+
+
+## Acceptance Criteria
+
+```
+GIVEN a command-line application that accepts user input
+    WHEN I am prompted for my team members and their information
+        THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+
+    WHEN I click on an email address in the HTML
+        THEN my default email program opens and populates the TO field of the email with the address
+
+    WHEN I click on the GitHub username
+        THEN that GitHub profile opens in a new tab
+
+    WHEN I start the application
+        THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
+
+    WHEN I enter the team manager’s name, employee ID, email address, and office number
+        THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
+
+    WHEN I select the engineer option
+        THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
+
+    WHEN I select the intern option
+        THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
+
+    WHEN I decide to finish building my team
+        THEN I exit the application, and the HTML is generated
+```
+
+Once the files were finalized, everything was uploaded to a Github Repository
+
+    * Repository contains:
+    *       quality README file with description,
+    *       screenshot, and
+    *       link to deployed application.
+    *       link to the video demonstration
+
+![GitBash](./assets/GitBash.PNG)
+
+![README](./assets/README.PNG)
+
+![README2](./assets/README2.PNG)
+
+Video Demonstration: https://drive.google.com/file/d/1xXQrj3Hf00pZyiUOltd0Mv4dfASBvJYd/view
+
+Github: https://github.com/D-Loot/W09-README-Generator
+
+# Background
+
 ## Your Task
 
 Your task is to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so you’ll also write a unit test for every part of your code and ensure that it passes each test.
@@ -116,7 +172,7 @@ Finally, although it’s not a requirement, consider adding validation to ensure
 
 ## Grading Requirements
 
-This homework is graded based on the following criteria: 
+This homework is graded based on the following criteria:
 
 ### Deliverables: 15%
 

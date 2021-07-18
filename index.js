@@ -1,36 +1,13 @@
-// GIVEN a command-line application that accepts user input
-    // WHEN I am prompted for my team members and their information
-        // THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-
-    // WHEN I click on an email address in the HTML
-        // THEN my default email program opens and populates the TO field of the email with the address
-
-    // WHEN I click on the GitHub username
-        // THEN that GitHub profile opens in a new tab
-
-    // WHEN I start the application
-        // THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-
-    // WHEN I enter the team manager’s name, employee ID, email address, and office number
-        // THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-
-    // WHEN I select the engineer option
-        // THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-
-    // WHEN I select the intern option
-        // THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-
-    // WHEN I decide to finish building my team
-        // THEN I exit the application, and the HTML is generated
-
 const inquirer = require('inquirer');
 
-// const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
+const fs = require("fs");
 
-const employees = []
+const employees = [];
+
+let cardsHtml = "";
 
 const checkIfIdExists = (id) => employees.find((emp) => emp.id === id);
 
@@ -54,14 +31,21 @@ function addManager(){
       newEmployee.email = response.email;
       newEmployee.officeNumber = response.officeNumber;
 // TODO - log the new employee to an array of employees
-      console.log(
-        `${newEmployee.name}
-        ${newEmployee.id}
-        ${newEmployee.email}
-        ${newEmployee.officeNumber}
-        ${newEmployee.getRole()}`
-      )
+
       employees.push(newEmployee)
+
+      let card =`<div class="card text-white bg-primary mb-3 d-flex justify-content-center m-3" style="max-width: 18rem; min-width: 12rem;">
+        <div class="card-header">${newEmployee.getRole()}
+        </div>
+        <div class="card-body bg-light">
+          <h5 class="card-title text-dark">${newEmployee.name}</h5>
+          <p class="card-text text-dark border p-1">ID: ${newEmployee.id}</p>
+          <p class="card-text text-dark border p-1">Email: <a href="mailto: ${newEmployee.email}" class="hover-text">${newEmployee.email}</a></p>
+          <p class="card-text text-dark border p-1">Office #: ${newEmployee.officeNumber}</p>
+        </div>
+      </div>`
+      cardsHtml += card
+
       addTeamMembers()
     }
   )
@@ -83,21 +67,27 @@ function addEngineer(){
   .then((response) =>
     {
       if (checkIfIdExists(response.id)){
-        console.log(`\n\nEmployee ID: ${response.id} already exists and was not added. Submit a different Employee.\n\n`);
+        console.log(`\n\nEmployee ID: ${response.id} already exists and was not added. Submit a different Employee.\n`);
       } else {
         newEmployee.name = response.name;
         newEmployee.id = response.id;
         newEmployee.email = response.email;
         newEmployee.github = response.github;
 // TODO - log the new employee to an array of employees
-        console.log(
-        `${newEmployee.name}
-        ${newEmployee.id}
-        ${newEmployee.email}
-        ${newEmployee.github}
-        ${newEmployee.getRole()}`
-      )
-      employees.push(newEmployee)
+
+        employees.push(newEmployee)
+
+        const card =`<div class="card text-white bg-primary mb-3 d-flex justify-content-center m-3" style="max-width: 18rem; min-width: 12rem;">
+          <div class="card-header">${newEmployee.getRole()}
+          </div>
+          <div class="card-body bg-light">
+            <h5 class="card-title text-dark">${newEmployee.name}</h5>
+            <p class="card-text text-dark border p-1">ID: ${newEmployee.id}</p>
+            <p class="card-text text-dark border p-1">Email: <a href="mailto: ${newEmployee.email}" class="hover-text">${newEmployee.email}</a></p>
+            <p class="card-text text-dark border p-1">GitHub #: <a href="https://github.com/${newEmployee.github}" class="hover-text">${newEmployee.github}</a></p>
+          </div>
+        </div>`
+        cardsHtml += card
       }
       addTeamMembers();
     }
@@ -127,14 +117,19 @@ function addIntern(){
         newEmployee.email = response.email;
         newEmployee.school = response.school;
   // TODO - log the new employee to an array of employees
-        console.log(
-          `${newEmployee.name}
-          ${newEmployee.id}
-          ${newEmployee.email}
-          ${newEmployee.school}
-          ${newEmployee.getRole()}`
-        )
         employees.push(newEmployee)
+
+        const card =`<div class="card text-white bg-primary mb-3 d-flex justify-content-center m-3" style="max-width: 18rem; min-width: 12rem;">
+          <div class="card-header">${newEmployee.getRole()}
+          </div>
+          <div class="card-body bg-light">
+            <h5 class="card-title text-dark">${newEmployee.name}</h5>
+            <p class="card-text text-dark border p-1">ID: ${newEmployee.id}</p>
+            <p class="card-text text-dark border p-1">Email: <a href="mailto: ${newEmployee.email}" class="hover-text">${newEmployee.email}</a></p>
+            <p class="card-text text-dark border p-1">School #: ${newEmployee.school}</p>
+          </div>
+        </div>`
+        cardsHtml += card
       }
       addTeamMembers();
     }
@@ -158,14 +153,42 @@ function addTeamMembers(){
       } else if (response.type === "Intern"){
         addIntern();
       } else {
-        console.log(employees);
+        completeCode(cardsHtml)
         return
       }
     }
   )
 }
 
-function init(){
-  addManager();
+function completeCode(renderedCards){
+
+  const code = `<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <title>My Team</title>
+      </head>
+      <body>
+        <header class="text-center text-white bg-danger mb-3 h3 pt-3 pb-3">
+          My Team
+        </header>
+        <section class="d-flex justify-content-center flex-wrap">
+        ${renderedCards}
+        </section>
+      </body>
+    </html>`
+
+  fs.writeFile(`./dist/MyTeam.html`,code, function (err) {
+    if (err) throw err;
+    console.log(`Website Created!`);
+  })
 }
+
+function init(){
+  addManager()
+}
+
 init()
