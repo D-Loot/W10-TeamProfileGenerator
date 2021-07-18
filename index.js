@@ -84,7 +84,7 @@ function addEngineer(){
             <h5 class="card-title text-dark">${newEmployee.name}</h5>
             <p class="card-text text-dark border p-1">ID: ${newEmployee.id}</p>
             <p class="card-text text-dark border p-1">Email: <a href="mailto: ${newEmployee.email}" class="hover-text">${newEmployee.email}</a></p>
-            <p class="card-text text-dark border p-1">GitHub #: <a href="https://github.com/${newEmployee.github}" class="hover-text">${newEmployee.github}</a></p>
+            <p class="card-text text-dark border p-1">GitHub: <a href="https://github.com/${newEmployee.github}" target="_blank"  class="hover-text">${newEmployee.github}</a></p>
           </div>
         </div>`
         cardsHtml += card
@@ -126,7 +126,7 @@ function addIntern(){
             <h5 class="card-title text-dark">${newEmployee.name}</h5>
             <p class="card-text text-dark border p-1">ID: ${newEmployee.id}</p>
             <p class="card-text text-dark border p-1">Email: <a href="mailto: ${newEmployee.email}" class="hover-text">${newEmployee.email}</a></p>
-            <p class="card-text text-dark border p-1">School #: ${newEmployee.school}</p>
+            <p class="card-text text-dark border p-1">School: ${newEmployee.school}</p>
           </div>
         </div>`
         cardsHtml += card

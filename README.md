@@ -44,15 +44,15 @@ Once the files were finalized, everything was uploaded to a Github Repository
     *       link to deployed application.
     *       link to the video demonstration
 
-![GitBash](./assets/GitBash.PNG)
+![WebSite](./Assets/WebSite.PNG)
 
-![README](./assets/README.PNG)
+![CommandLine](./Assets/CommandLine.PNG)
 
-![README2](./assets/README2.PNG)
+![TestInfo](./Assets/TestInfo.PNG)
 
-Video Demonstration: https://drive.google.com/file/d/1xXQrj3Hf00pZyiUOltd0Mv4dfASBvJYd/view
+Video Demonstration: https://drive.google.com/file/d/17qXxsqKfOS6jnnIl305AOLjE93tIOI7-/view
 
-Github: https://github.com/D-Loot/W09-README-Generator
+Github: https://github.com/D-Loot/W10-TeamProfileGenerator
 
 # Background
 
